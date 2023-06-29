@@ -1,7 +1,7 @@
 package servlets;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,18 +9,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dto.StockDTO;
 import stock.Service_st;
+import vo.AmountListVO;
 
-@WebServlet("/stockList")
-public class StockListServlet extends HttpServlet {
+@WebServlet("/totalstock")
+public class TotalStockServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		Service_st s_serv = new Service_st();
-		List<StockDTO> slist = s_serv.selectAllStock();
-		request.setAttribute("slist", slist);
-		request.getRequestDispatcher("main2.jsp?req=list").forward(request, response);
+		Service_st st_serv = new Service_st();
+		ArrayList<AmountListVO> aList = st_serv.getTotalList();
+		request.setAttribute("alist", aList);
+		request.getRequestDispatcher("main2.jsp").forward(request, response);
 	}
+
 }

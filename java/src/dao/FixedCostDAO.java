@@ -24,9 +24,9 @@ public class FixedCostDAO implements DBcrud{
 		try {
 			con = DBcon.getConn();
 			pstmt = con.prepareStatement(query);
-			pstmt.setString(1, cost.getF_name());
-			pstmt.setInt(2, cost.getF_cost() );
-			pstmt.setInt(3, cost.getF_date());
+			pstmt.setString(1, cost.getFi_name());
+			pstmt.setInt(2, cost.getFi_cost() );
+			pstmt.setInt(3, cost.getFi_date());
 			int result = pstmt.executeUpdate();
 			if (result == 1 )
 				flag = true;
@@ -61,10 +61,10 @@ public class FixedCostDAO implements DBcrud{
 			
 			while(rs.next()) {
 				if( rs != null ) {
-					String f_name = rs.getString("f_name");
-					int f_cost = rs.getInt("f_cost");
-					int f_date = rs.getInt("f_date");
-					FixedCostDTO dto = new FixedCostDTO(f_name, f_cost, f_date);
+					FixedCostDTO dto = new FixedCostDTO();
+					dto.setFi_name(rs.getString("fi_name"));
+					dto.setFi_cost(rs.getInt("fi_cost"));
+					dto.setFi_date(rs.getInt("fi_date"));
 					list.add(dto);
 				}
 			}
@@ -92,14 +92,14 @@ public class FixedCostDAO implements DBcrud{
 		FixedCostDTO cost = (FixedCostDTO)dto;
 		boolean flag = false;
 		
-		String query = "UPDATE FROM fixedcost SET f_cost=?, f_date=? WHERE f_name=?";
+		String query = "UPDATE FROM fixedcost SET fi_cost=?, fi_date=? WHERE fi_name=?";
 		
 		try {
 			con = DBcon.getConn();
 			pstmt = con.prepareStatement(query);
-			pstmt.setInt(1, cost.getF_cost());
-			pstmt.setInt(2, cost.getF_date());
-			pstmt.setString(3, cost.getF_name());
+			pstmt.setInt(1, cost.getFi_cost());
+			pstmt.setInt(2, cost.getFi_date());
+			pstmt.setString(3, cost.getFi_name());
 			int result = pstmt.executeUpdate();
 			
 			if (result == 1 )
@@ -126,12 +126,12 @@ public class FixedCostDAO implements DBcrud{
 		FixedCostDTO cost = (FixedCostDTO)dto;
 		boolean flag = false;
 		
-		String query = "DELETE FROM fixedcost WHERE f_name=?";
+		String query = "DELETE FROM fixedcost WHERE fi_name=?";
 		
 		try {
 			con = DBcon.getConn();
 			pstmt = con.prepareStatement(query);
-			pstmt.setString(1, cost.getF_name());
+			pstmt.setString(1, cost.getFi_name());
 			int result = pstmt.executeUpdate();
 			
 			if (result ==1)

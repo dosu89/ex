@@ -24,9 +24,9 @@ public class MaterialDAO implements DBcrud{
 		try {
 			con = DBcon.getConn();
 			pstmt = con.prepareStatement(query);
-			pstmt.setString(1, m.getM_code());
-			pstmt.setString(2, m.getM_name());
-			pstmt.setString(3, m.getM_group());
+			pstmt.setString(1, m.getMa_code());
+			pstmt.setString(2, m.getMa_name());
+			pstmt.setString(3, m.getMa_group());
 			int result = pstmt.executeUpdate();
 			
 			if(result == 1) {
@@ -65,10 +65,10 @@ public class MaterialDAO implements DBcrud{
 			
 			while(rs.next()) {
 				if( rs != null ) {
-					String m_code = rs.getString("m_code");
-					String m_name = rs.getString("m_name");
-					String m_group = rs.getString("m_group");
-					MaterialDTO dto = new MaterialDTO(m_code, m_name, m_group);
+					MaterialDTO dto = new MaterialDTO();
+					dto.setMa_code(rs.getString("ma_code"));
+					dto.setMa_name(rs.getString("ma_name"));
+					dto.setMa_group(rs.getString("ma_group"));
 					list.add(dto);
 				}
 			}
@@ -96,21 +96,21 @@ public class MaterialDAO implements DBcrud{
 		MaterialDTO m = (MaterialDTO)dto;
 		boolean flag = false;
 		
-		String query = "UPDATE material SET m_name = ?, m_group = ? WHERE m_code = ?";
+		String query = "UPDATE material SET ma_name = ?, ma_group = ? WHERE ma_code = ?";
 		
 		try {
 			con = DButil.DBcon.getConn();
 			pstmt = con.prepareStatement(query);
-			pstmt.setString(1, m.getM_name());
-			pstmt.setString(2, m.getM_group());
-			pstmt.setString(3, m.getM_code());
+			pstmt.setString(1, m.getMa_name());
+			pstmt.setString(2, m.getMa_group());
+			pstmt.setString(3, m.getMa_code());
 			int result = pstmt.executeUpdate();
 			
 			if ( result == 1)
 				flag = true;
 			
 		} catch (Exception e) {
-			System.out.println("업데이트 실패 : " + e.getMessage());
+			System.out.println("재료 업데이트 실패 : " + e.getMessage());
 		} finally {
 			try {
 				if (pstmt != null)
@@ -131,19 +131,19 @@ public class MaterialDAO implements DBcrud{
 		MaterialDTO m = (MaterialDTO)dto;
 		boolean flag = false;
 		
-		String query = "DELETE FROM material WHERE m_code = ?";
+		String query = "DELETE FROM material WHERE ma_code = ?";
 		
 		try {
 			con = DButil.DBcon.getConn();
 			pstmt = con.prepareStatement(query);
-			pstmt.setString(1, m.getM_code());
+			pstmt.setString(1, m.getMa_code());
 			int result = pstmt.executeUpdate();
 			
 			if (result == 1) 
 				flag = true;
 			
 		} catch (Exception e) {
-			System.out.println("삭제 실패 : " + e.getMessage());
+			System.out.println("재료 삭제 실패 : " + e.getMessage());
 		} finally {
 			try {
 				if (pstmt != null)

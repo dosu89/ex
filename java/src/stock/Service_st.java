@@ -10,11 +10,11 @@ import vo.AmountListVO;
 
 public class Service_st {
 
-		public void insertStock(String ma_code, int st_amount) {
+		public void insertStock(String ma_code, int st_ea) {
 			StockDTO s = new StockDTO();
 			StockDAO dao = new StockDAO();
 			s.setMa_code(ma_code);
-			s.setSt_amount(st_amount);
+			s.setSt_ea(st_ea);
 			s.setSt_recDate(LocalDateTime.now());
 			if (dao.insert(s)) {
 				System.out.println("재고 등록 완료");
@@ -55,12 +55,9 @@ public class Service_st {
 		}
 		
 		// 재고 총량 리스트 반환 후 보여주기
-		public void getTotalList() {
+		public ArrayList<AmountListVO> getTotalList() {
 			StockDAO sdao = new StockDAO();
 			ArrayList<AmountListVO> alist = (ArrayList<AmountListVO>) sdao.getTotal();
-			for(AmountListVO a : alist) {
-				System.out.print(a + "     ");
-			}
-			System.out.println();
+			return alist;
 		}
 }

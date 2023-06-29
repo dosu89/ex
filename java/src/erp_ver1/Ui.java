@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 import dto.ExpenseDTO;
 import dto.StockDTO;
-import expense.Service_e;
+import expense.Service_ex;
 import stock.Service_st;
 import vo.AmountListVO;
 
@@ -15,7 +15,7 @@ public class Ui {
 
 	public static void mainUi() {
 		Scanner sc = new Scanner(System.in);
-		Service_e e_serv = new Service_e();
+		Service_ex e_serv = new Service_ex();
 		Service_st s_serv = new Service_st();
 		LocalDate today = LocalDate.now();
 		line(80);
@@ -163,7 +163,7 @@ public class Ui {
 	}
 	
 	public static void todayFixedCost() {
-		Service_e e_serv = new Service_e();
+		Service_ex e_serv = new Service_ex();
 		ArrayList<String> f_names = e_serv.fixedCostCheck();
 		System.out.print("오늘 고정비 지출 내역은 [ ");
 		for (String s : f_names) {

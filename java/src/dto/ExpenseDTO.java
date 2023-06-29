@@ -3,73 +3,47 @@ package dto;
 import java.time.LocalDateTime;
 
 public class ExpenseDTO {
-	private int e_no;
-	private String m_code;
-	private int e_cost;
-	private int e_amount;
-	private LocalDateTime e_date;
+	private int ex_no;
+	private String ma_code;
+	private int ex_cost;
+	private int ex_ea;
+	private LocalDateTime ex_date;
+	private String ex_note;
 	
-	public ExpenseDTO() {}
-
-	public ExpenseDTO(String m_code, int e_cost, int e_amount) {
-		super();
-		this.m_code = m_code;
-		this.e_cost = e_cost;
-		this.e_amount = e_amount;
+	public int getEx_no() {
+		return ex_no;
 	}
-
-	public ExpenseDTO(int e_no, String m_code, int e_cost, int e_amount, LocalDateTime e_date) {
-		super();
-		this.e_no = e_no;
-		this.m_code = m_code;
-		this.e_cost = e_cost;
-		this.e_amount = e_amount;
-		this.e_date = e_date;
+	public void setEx_no(int ex_no) {
+		this.ex_no = ex_no;
 	}
-
-	public int getE_no() {
-		return e_no;
+	public String getMa_code() {
+		return ma_code;
 	}
-
-	public void setE_no(int e_no) {
-		this.e_no = e_no;
+	public void setMa_code(String ma_code) {
+		this.ma_code = ma_code;
 	}
-
-	public String getM_code() {
-		return m_code;
+	public int getEx_cost() {
+		return ex_cost;
 	}
-
-	public void setM_code(String m_code) {
-		this.m_code = m_code;
+	public void setEx_cost(int ex_cost) {
+		this.ex_cost = ex_cost;
 	}
-
-	public int getE_cost() {
-		return e_cost;
+	public int getEx_ea() {
+		return ex_ea;
 	}
-
-	public void setE_cost(int e_cost) {
-		this.e_cost = e_cost;
+	public void setEx_ea(int ex_ea) {
+		this.ex_ea = ex_ea;
 	}
-
-	public int getE_amount() {
-		return e_amount;
+	public LocalDateTime getEx_date() {
+		return ex_date;
 	}
-
-	public void setE_amount(int e_amount) {
-		this.e_amount = e_amount;
+	public void setEx_date(LocalDateTime ex_date) {
+		this.ex_date = ex_date;
 	}
-
-	public LocalDateTime getE_date() {
-		return e_date;
+	public String getEx_note() {
+		return ex_note;
 	}
-
-	public void setE_date(LocalDateTime e_date) {
-		this.e_date = e_date;
-	}
-
-	@Override
-	public String toString() {
-		return "ExpenseDTO [e_no=" + e_no + ", m_code=" + m_code + ", e_cost=" + e_cost + ", e_amount=" + e_amount
-				+ ", e_date=" + e_date + "]";
+	public void setEx_note(String ex_note) {
+		this.ex_note = ex_note;
 	}
 }

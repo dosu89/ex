@@ -23,14 +23,59 @@
             "aside section"
         ;
 	}
+	
+	section {
+		grid-area: section;
+		padding : 20px;
+		border : 1px solid black;
+		box-shadow: 5px 5px 5px grey;
+	}
+	
+	aside {
+		grid-area : aside;
+		border : 1px solid black;
+		box-shadow: 5px 5px 5px grey;
+	}
+
+	ul {
+		list-style: none;
+		margin : 0px;
+		padding : 0px;
+	}
+	
+	li {
+		text-align: center;
+		line-height: 100px;
+	}
 </style>
 </head>
 <body>
+<%
+	String req = request.getParameter("req");
+	String includeP = "";
+	if (req.equals("list")) {
+		includeP = "<jsp:include page='stockList.jsp' />";
+	} else {
+		includeP = "<jsp:include page='home.jsp' />";
+	}
+%>
 <div id = "page">
 	<jsp:include page="header.jsp" />
 	<jsp:include page="nav.jsp" />
-	<jsp:include page="aside.jsp" />
-	<jsp:include page="stockList.jsp" />
+	
+	<aside>
+		<ul>
+			<li>총 채고량</li>
+			<li><a href="stockList">재고 입/출 리스트</a></li>
+			<li>세부메뉴3</li>
+			<li>세부메뉴4</li>
+			<li>세부메뉴5</li>
+			<li>세부메뉴6</li>
+		</ul>
+	</aside>
+	<section>
+		<%=  includeP %>
+	</section>
 </div>
 </body>
 </html>

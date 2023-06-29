@@ -14,7 +14,7 @@ public class DBconPool {
 		try {
 			InitialContext initCtx = new InitialContext();
 			Context ctx = (Context)initCtx.lookup("java:comp/env");	
- 			DataSource source = (DataSource)ctx.lookup("erp");
+ 			DataSource source = (DataSource)ctx.lookup("db.erp");
 			
 			con = source.getConnection();
 			

@@ -7,7 +7,7 @@ import dao.MaterialDAO;
 import dto.ExpenseDTO;
 import dto.MaterialDTO;
 import dto.StockDTO;
-import expense.Service_e;
+import expense.Service_ex;
 import stock.Service_st;
 
 public class Ex {

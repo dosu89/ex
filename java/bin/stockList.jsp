@@ -13,10 +13,6 @@
 <title>Insert title here</title>
 <style>
 	section {
-		grid-area: section;
-		padding : 20px;
-		border : 1px solid black;
-		box-shadow: 5px 5px 5px grey;
 		display : grid;
 		grid-template-rows: 1fr 40px;
 		grid-template-areas: 
@@ -26,7 +22,8 @@
 	
 	#tbl {
 		grid-area: table;
-		border : 1px solid red;
+		border : 1px solid grey;
+		box-shadow: 5px 5px 5px grey;
 	}
 	
 	th, td {
@@ -36,16 +33,15 @@
 	
 	#pages {
 		grid-area: pages;
-		border: 1px solid blue;
 		text-align: center;
-		line-height: 40px;
+		line-height: 60px;
 	}
 	
 	.st_no {
 		width: 20%;
 	}
 	
-	.st_name {
+	.ma_name {
 		width: 20%;
 	}
 	
@@ -60,27 +56,27 @@
 </head>
 <body>
 <%
-	Service_st s_serv = new Service_st();
-	List<StockDTO> slist = s_serv.selectAllStock();
+	List<StockDTO> stList = (List<StockDTO>)(Object)request.getAttribute("slist");
 %>
-	<section>
-		<div id="tbl">
+	<div id="tbl">
 		<table>
 			<tr>
 				<th>입출 번호</th><th>제품 이름</th><th>수량</th><th>입출 날짜</th><th>비고</th>
 			</tr>
-			<c:forEach var="stock" items="<%= slist %>">
+			<c:forEach var="stock" items="<%= stList %>">
 				<tr>
 					<jsp:useBean id="stock" class="dto.StockDTO" />
 					<jsp:setProperty property="*" name="stock"/>
-					<td>${stock.st_no }</td>				
-					<td>${stock.ma_code }</td>				
-					<td>${stock.st_amount }</td>
-					<td>${stock.st_recDate }</td>				
+					<td class="st_no">${stock.st_no }</td>				
+					<td class="ma_name">${stock.ma_code }</td>				
+					<td class="st_ea">${stock.st_ea }</td>
+					<td class="st_date">
+						<fmt:parseDate value="${stock.st_recDate }" var="date" pattern="yyyy-MM-dd'T'HH:mm"/>
+						<fmt:formatDate value="${date }" pattern="yyyy-MM-dd : HH시mm분" />
+					</td>				
 					<td>${stock.st_note }</td>				
 				</tr>
 			</c:forEach>
-
 		</table>
 		</div>
 		<div id="pages">
@@ -91,7 +87,6 @@
 			<button>4</button>
 			<button>5</button>
 			<button>&gt&gt</button>
-		</div>
-	</section>
+	</div>
 </body>
 </html>

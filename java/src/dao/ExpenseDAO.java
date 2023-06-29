@@ -21,16 +21,16 @@ public class ExpenseDAO implements DBcrud{
 		ExpenseDTO expense = (ExpenseDTO)dto;
 		boolean flag = false;
 		
-		String query = "INSERT INTO expense (m_code, e_cost, e_amount, e_date) "
-				+"VALUE (?, ?, ?, ?)";
+		String query = "INSERT INTO expense VALUE (null, ?, ?, ?, ?, ?)";
 				
 		try {
 			con = DButil.DBcon.getConn();
 			pstmt = con.prepareStatement(query);
-			pstmt.setString(1, expense.getM_code());
-			pstmt.setInt(2, expense.getE_cost());
-			pstmt.setInt(3, expense.getE_amount());
-			pstmt.setTimestamp(4, Timestamp.valueOf(expense.getE_date()));
+			pstmt.setString(1, expense.getMa_code());
+			pstmt.setInt(2, expense.getEx_cost());
+			pstmt.setInt(3, expense.getEx_ea());
+			pstmt.setTimestamp(4, Timestamp.valueOf(expense.getEx_date()));
+			pstmt.setString(5, expense.getEx_note());
 			int result = pstmt.executeUpdate();
 			
 			if (result ==1 )
@@ -67,12 +67,13 @@ public class ExpenseDAO implements DBcrud{
 			
 			while(rs.next()) {
 				if( rs != null ) {
-					int e_no = rs.getInt("e_no");
-					String m_code = rs.getString("m_code");
-					int e_cost = rs.getInt("e_cost");
-					int e_amount = rs.getInt("e_amount");
-					LocalDateTime e_date = rs.getTimestamp("e_date").toLocalDateTime();
-					ExpenseDTO dto = new ExpenseDTO(e_no, m_code, e_cost, e_amount, e_date);
+					ExpenseDTO dto = new ExpenseDTO();
+					dto.setEx_no(rs.getInt("ex_no"));
+					dto.setMa_code(rs.getString("ma_code"));
+					dto.setEx_cost(rs.getInt("ex_cost"));
+					dto.setEx_ea(rs.getInt("ex_ea"));
+					dto.setEx_date(rs.getTimestamp("ex_date").toLocalDateTime());
+					dto.setEx_note(rs.getNString("ex_note"));
 					list.add(dto);
 				}
 			}
@@ -100,17 +101,17 @@ public class ExpenseDAO implements DBcrud{
 		ExpenseDTO expense = (ExpenseDTO)dto;
 		boolean flag = false;
 		
-		String query = "UPDATE expense SET m_code = ?, e_cost = ?, e_amount = ?, e_date = ? "
-							+ "WHERE e_no = ?";
+		String query = "UPDATE expense SET ma_code = ?, ex_cost = ?, ex_ea = ?, ex_date = ? "
+							+ "WHERE ex_no = ?";
 		
 		try {
 			con = DButil.DBcon.getConn();
 			pstmt = con.prepareStatement(query);
-			pstmt.setString(1, expense.getM_code());
-			pstmt.setInt(2, expense.getE_cost());
-			pstmt.setInt(3, expense.getE_amount());
-			pstmt.setTimestamp(4, Timestamp.valueOf(expense.getE_date()));
-			pstmt.setInt(5, expense.getE_no());
+			pstmt.setString(1, expense.getMa_code());
+			pstmt.setInt(2, expense.getEx_cost());
+			pstmt.setInt(3, expense.getEx_ea());
+			pstmt.setTimestamp(4, Timestamp.valueOf(expense.getEx_date()));
+			pstmt.setInt(5, expense.getEx_no());
 			int result = pstmt.executeUpdate();
 			
 			if ( result == 1)
@@ -138,12 +139,12 @@ public class ExpenseDAO implements DBcrud{
 		ExpenseDTO expense = (ExpenseDTO)dto;
 		boolean flag = false;
 		
-		String query = "DELETE FROM expense WHERE e_no = ?";
+		String query = "DELETE FROM expense WHERE ex_no = ?";
 		
 		try {
 			con = DButil.DBcon.getConn();
 			pstmt = con.prepareStatement(query);
-			pstmt.setInt(1, expense.getE_no());
+			pstmt.setInt(1, expense.getEx_no());
 			int result = pstmt.executeUpdate();
 			
 			if (result == 1) 
@@ -171,7 +172,7 @@ public class ExpenseDAO implements DBcrud{
 		ResultSet rs = null;
 		List<ExpenseDTO> list = new ArrayList<>();
 		
-		String query = "SELECT * FROM expense WHERE date(e_date) BETWEEN ? AND ?;";
+		String query = "SELECT * FROM expense WHERE date(ex_date) BETWEEN ? AND ?;";
 		
 		try {
 			con = DButil.DBcon.getConn();
@@ -182,12 +183,13 @@ public class ExpenseDAO implements DBcrud{
 			
 			while(rs.next()) {
 				if( rs != null ) {
-					int e_no = rs.getInt("e_no");
-					String m_code = rs.getString("m_code");
-					int e_cost = rs.getInt("e_cost");
-					int e_amount = rs.getInt("e_amount");
-					LocalDateTime e_date = rs.getTimestamp("e_date").toLocalDateTime();
-					ExpenseDTO dto = new ExpenseDTO(e_no, m_code, e_cost, e_amount, e_date);
+					ExpenseDTO dto = new ExpenseDTO();
+					dto.setEx_no(rs.getInt("ex_no"));
+					dto.setMa_code(rs.getString("ma_code"));
+					dto.setEx_cost(rs.getInt("ex_cost"));
+					dto.setEx_ea(rs.getInt("ex_ea"));
+					dto.setEx_date(rs.getTimestamp("ex_date").toLocalDateTime());
+					dto.setEx_note(rs.getNString("ex_note"));
 					list.add(dto);
 				}
 			}

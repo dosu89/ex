@@ -24,6 +24,8 @@
 		font-size: 40px;
 	}
 	
+	
+	
 </style>
 </head>
 <body>
@@ -32,7 +34,7 @@
 			<li><a href="main.jsp">메인</a></li>
 			<li>매출</li>
 			<li>매입</li>
-			<li><a href="main2.jsp">재고</a></li>
+			<li><a href="stockList">재고</a></li>
 			<li>상품</li>
 			<li>직원</li>
 		</ul>

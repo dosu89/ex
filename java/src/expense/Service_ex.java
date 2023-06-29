@@ -15,13 +15,16 @@ import stock.Service_st;
 
 
 
-public class Service_e {
+public class Service_ex {
 
-	public void insertExpense(String m_code, int e_cost, int e_amount) {
-		ExpenseDTO e = new ExpenseDTO(m_code, e_cost, e_amount);
-		e.setE_date(LocalDateTime.now());
+	public void insertExpense(String ma_code, int ex_cost, int ex_ea) {
+		ExpenseDTO e = new ExpenseDTO();
+		e.setMa_code(ma_code);
+		e.setEx_cost(ex_cost);
+		e.setEx_ea(ex_ea);
+		e.setEx_date(LocalDateTime.now());
 		Service_st s_serv = new Service_st();
-		Service_e e_serv = new Service_e();
+		Service_ex e_serv = new Service_ex();
 		ExpenseDAO dao = new ExpenseDAO();
 		StockDTO s = null;
 		
@@ -31,7 +34,7 @@ public class Service_e {
 			//지출 입력시 재고 데이터 확인후 재고 입력
 			if(e_serv.auto_io(e) != null)
 				s= e_serv.auto_io(e);
-				s_serv.insertStock(s.getM_code(), s.getS_amount());
+				s_serv.insertStock(s.getMa_code(), s.getSt_ea());
 				System.out.println("재고 자동 입력 완료");
 	}
 	
@@ -69,9 +72,12 @@ public class Service_e {
 		@SuppressWarnings("unchecked")
 		List<FixedCostDTO> fList = (List<FixedCostDTO>)(Object)dao.getData();
 		for (FixedCostDTO f : fList) {
-			if(f.getF_date() == day) {
-				ExpenseDTO dto = new ExpenseDTO(f.getF_name(), f.getF_cost(), 1);
-				dto.setE_date(LocalDateTime.now());
+			if(f.getFi_date() == day) {
+				ExpenseDTO dto = new ExpenseDTO();
+				dto.setMa_code(f.getFi_name());
+				dto.setEx_cost(f.getFi_cost());
+				dto.setEx_ea(1);
+				dto.setEx_date(LocalDateTime.now());
 				if (dao.insert(dto))
 					System.out.println("고정비 등록 완료");
 					flag = true;
@@ -89,8 +95,8 @@ public class Service_e {
 		List<FixedCostDTO> fList = (List<FixedCostDTO>)(Object)dao.getData();
 		ArrayList<String> f_names = new ArrayList<>();
 		for (FixedCostDTO f : fList) {
-			if(f.getF_date() == day) {
-				f_names.add(f.getF_name());
+			if(f.getFi_date() == day) {
+				f_names.add(f.getFi_name());
 			}
 		}
 		return f_names;
@@ -103,10 +109,12 @@ public class Service_e {
 		@SuppressWarnings("unchecked")
 		List<MaterialDTO> mlist = (List<MaterialDTO>)(Object)mdao.getData();
 		for (MaterialDTO m : mlist) {
-			if(m.getM_code().equals(e.getM_code())) {
-				String m_code = e.getM_code();
-				int s_amount = e.getE_amount();
-				s = new StockDTO(m_code, s_amount);
+			if(m.getMa_code().equals(e.getMa_code())) {
+				String ma_code = e.getMa_code();
+				int st_ea = e.getEx_ea();
+				s = new StockDTO();
+				s.setMa_code(ma_code);
+				s.setSt_ea(st_ea);
 			}
 		}
 		return s;
