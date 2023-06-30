@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import stock.Service_st;
-import vo.AmountListVO;
+import vo.TotalStockVO;
 
 @WebServlet("/totalstock")
 public class TotalStockServlet extends HttpServlet {
@@ -18,9 +18,9 @@ public class TotalStockServlet extends HttpServlet {
 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Service_st st_serv = new Service_st();
-		ArrayList<AmountListVO> aList = st_serv.getTotalList();
+		ArrayList<TotalStockVO> aList = st_serv.getTotalList();
 		request.setAttribute("alist", aList);
-		request.getRequestDispatcher("main2.jsp").forward(request, response);
+		request.getRequestDispatcher("main2.jsp?req=total").forward(request, response);
 	}
 
 }

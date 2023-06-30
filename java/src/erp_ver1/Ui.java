@@ -9,7 +9,7 @@ import dto.ExpenseDTO;
 import dto.StockDTO;
 import expense.Service_ex;
 import stock.Service_st;
-import vo.AmountListVO;
+import vo.TotalStockVO;
 
 public class Ui {
 

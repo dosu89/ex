@@ -13,7 +13,7 @@ import DButil.DBconPool;
 import DButil.DBconnect;
 import DButil.DBcrud;
 import dto.StockDTO;
-import vo.AmountListVO;
+import vo.TotalStockVO;
 
 public class StockDAO implements DBcrud{
 
@@ -262,11 +262,11 @@ public class StockDAO implements DBcrud{
 	}
 	
 	// 현재 물품 별 재고 총량 리스트 반환
-	public List<AmountListVO> getTotal() {
+	public List<TotalStockVO> getTotal() {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		List<AmountListVO> list = new ArrayList<>();
+		List<TotalStockVO> list = new ArrayList<>();
 		
 		String query = "SELECT m.ma_name, SUM(s.st_ea) " + 
 				"FROM stock s , material m " + 
@@ -281,11 +281,10 @@ public class StockDAO implements DBcrud{
 			
 			if(rs != null) {
 				while(rs.next()) {
-					String name = rs.getString(1);
-					int total = rs.getInt(2);
-					
-					AmountListVO a = new AmountListVO(name, total);
-					list.add(a);
+					TotalStockVO s = new TotalStockVO();
+					s.setMa_name(rs.getString(1));
+					s.setTotalEa(rs.getInt(2));
+					list.add(s);
 				}
 			}
 		} catch (Exception e) {

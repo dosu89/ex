@@ -54,10 +54,12 @@
 	String req = request.getParameter("req");
 	String includeP = "";
 	if (req.equals("list")) {
-		includeP = "<jsp:include page='stockList.jsp' />";
-	} else {
-		includeP = "<jsp:include page='home.jsp' />";
+		includeP = "stockList.jsp";
+	} else if (req.equals("total")) {
+		includeP = "totalStock.jsp";
 	}
+	
+	pageContext.setAttribute("page", includeP);
 %>
 <div id = "page">
 	<jsp:include page="header.jsp" />
@@ -65,7 +67,7 @@
 	
 	<aside>
 		<ul>
-			<li>총 채고량</li>
+			<li><a href="totalstock">총 채고량</a></li>
 			<li><a href="stockList">재고 입/출 리스트</a></li>
 			<li>세부메뉴3</li>
 			<li>세부메뉴4</li>
@@ -74,7 +76,7 @@
 		</ul>
 	</aside>
 	<section>
-		<%=  includeP %>
+		<jsp:include page="${page }" />
 	</section>
 </div>
 </body>

@@ -6,7 +6,7 @@ import java.util.List;
 
 import dao.StockDAO;
 import dto.StockDTO;
-import vo.AmountListVO;
+import vo.TotalStockVO;
 
 public class Service_st {
 
@@ -55,9 +55,9 @@ public class Service_st {
 		}
 		
 		// 재고 총량 리스트 반환 후 보여주기
-		public ArrayList<AmountListVO> getTotalList() {
+		public ArrayList<TotalStockVO> getTotalList() {
 			StockDAO sdao = new StockDAO();
-			ArrayList<AmountListVO> alist = (ArrayList<AmountListVO>) sdao.getTotal();
+			ArrayList<TotalStockVO> alist = (ArrayList<TotalStockVO>) sdao.getTotal();
 			return alist;
 		}
 }
